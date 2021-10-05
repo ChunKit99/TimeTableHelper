@@ -31,13 +31,24 @@ A system can help student especially University Malaysia Pahang(UMP) to make a t
    ```sh
    java -jar XXX.jar
    ```
-3. Enter absolute path of CourseDetail.txt
-
-    For example:
+3. Enter absolute path of CourseDetail.txt(Or "CourseDetail.txt" only if open .jar in same directory)
+    
+  * Absolute path(Any directory)
+    
   ```sh
    C:\Users\user\Document\CourseDetail.txt
+  ```
+   
+
+
+  * Name of File(Same directory)
+   
+   
+   
+   ```sh
+   CourseDetail.txt
    ```
-4. Enter absolute path of CourseSection.txt
+4. Enter absolute path of CourseSection.txt(Or "CourseSection.txt" only if open .jar in same directory)
 5. Select Lecture Section for a course
 6. Select Lab Section for a course(if any)
 7. Repeat until done select all course.
