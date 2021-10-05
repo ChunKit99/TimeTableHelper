@@ -45,7 +45,7 @@ public class TimeTable {
         }
     }
 
-    public Day[] createDays() {
+    public Day[] createDays2() {//if Study from Sunday to Thursday
         Day[] day = new Day[5];
         day[0] = new Day("Sunday");
         day[1] = new Day("Monday");
@@ -55,7 +55,7 @@ public class TimeTable {
         return day;
     }
     
-    public Day[] createDays2() {
+    public Day[] createDays() {//if Study from Monday to Friday
         Day[] day = new Day[5];
         day[0] = new Day("Monday");
         day[1] = new Day("Tuesday");
