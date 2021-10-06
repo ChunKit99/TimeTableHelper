@@ -6,7 +6,7 @@ package main;
  * 2. the course will select from top to down, top is most important
  * 3. suitable for lab + lecture mode or lecture only, if no lab will auto skip
  * 4. 1 lecture section, have 2 lab section, lab name must contain lecture name
- * 5. Need To enter path(absoluted path or file name for same directory)
+ * 5. directly choose course after java -jar xxx.jar(No enter path, same directory have txt)
  * 6. Cat A = johor kedah kelantan terenganu
  * 7. (Current in Use)Cat B = Other than Cat A 
  * @author Liew Chun Kit
@@ -21,7 +21,7 @@ import java.io.FileNotFoundException;
 
 import model.*;
 
-public class MyApp2 {
+public class MyApp3 {
 
     static Scanner sc = new Scanner(System.in);
     int maxCredit = 19;
@@ -36,18 +36,13 @@ public class MyApp2 {
     TimeTable myTimeTable = new TimeTable();
 
     public static void main(String[] args) {
-        MyApp2 myTimeTableApp = new MyApp2();
+        MyApp3 myTimeTableApp = new MyApp3();
         int indexSectionLecture, indexSectionLab;
+        String pathCourseDetail = "CourseDetail.txt";
+        String pathCourseSection = "CourseSection.txt";
 
-        System.out.println("Path of Course Detail:");
-        String pathCourseDetail = sc.nextLine();
-        System.out.println("Path of Course Section:");
-        String pathCourseSection = sc.nextLine();
-
-        String javaCourseDetail = pathCourseDetail.replace("\\", "/");
-        String javaCourseSection = pathCourseSection.replace("\\", "/");
         try {
-            File f1 = new File(javaCourseDetail);
+            File f1 = new File(pathCourseDetail);
             Scanner dataReader = new Scanner(f1);
             while (dataReader.hasNextLine()) {
                 String fileData = dataReader.nextLine();
@@ -55,7 +50,7 @@ public class MyApp2 {
                 myTimeTableApp.addCourseDetail(str[0], str[1], Integer.parseInt(str[2]), Integer.parseInt(str[3]), Integer.parseInt(str[4]), Integer.parseInt(str[5]));
             }
             dataReader.close();
-            File f2 = new File(javaCourseSection);
+            File f2 = new File(pathCourseSection);
             dataReader = new Scanner(f2);
             while (dataReader.hasNextLine()) {
                 String fileData = dataReader.nextLine();
