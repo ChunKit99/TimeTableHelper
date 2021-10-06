@@ -8,18 +8,39 @@ A system can help student especially University Malaysia Pahang(UMP) to make a t
 
  ### Prerequisites
 
-* txt file
+* TXT file
 
-  2 TXT file for save the data of Course Detail and Course Section
+   Data of Course Detail and Course Section
 
-* java enviroment
+* Java enviroment
 
   At least install java 1.8 
 
 * Operating System
   
   Windows 10
+ 
+ 
+ 
+## Chategory of state
   
+### Group A
+  
+Negeri Johor Kedah Kelantan Terenganu
+	
+Download : TTH_DirectOpen(A).jar  OR  TTH_InputPath(A).jar
+	
+  
+### Group B
+  
+Other than Group B
+	
+Download : TTH_DirectOpen(B).jar  OR  TTH_InputPath(B).jar
+	
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+ 
+ 
  ## Usage
   
   You can use this system to select the course that will register in OR. 
@@ -27,52 +48,118 @@ A system can help student especially University Malaysia Pahang(UMP) to make a t
 1. Ready CourseDetail.txt
 2. Ready CourseSection.txt
 3. Download XXX.jar
-4. Command
-   ```sh
-   java -jar XXX.jar
-   ```
-3. Enter absolute path of CourseDetail.txt(Or "CourseDetail.txt" only if open .jar in same directory)
-    
-  * Absolute path(Any directory)
-    
-  ```sh
-   C:\Users\user\Document\CourseDetail.txt
-  ```
-   
 
-
-  * Name of File(Same directory)
-   
-   
-   
-   ```sh
-   CourseDetail.txt
-   ```
-4. Enter absolute path of CourseSection.txt(Or "CourseSection.txt" only if open .jar in same directory)
-5. Select Lecture Section for a course
-6. Select Lab Section for a course(if any)
-7. Repeat until done select all course.
-8. Reminder: There are posible not availble section, that mean you need to select other section of course.
-   
-   
-
-<p align="right">(<a href="#top">back to top</a>)</p>
+4. * For TTH_DirectOpen(A).jar && TTH_DirectOpen(B).jar
+		
+		* CourseDetail.txt and CourseSection.txt in SAME DIRECTORY
+			
+		* Open CMD go to drectory of XXX.jar use Command
+			
+		```sh
+		 java -jar XXX.jar
+		```
+		   
+	* For TTH_DirectOpen(A).jar && TTH_DirectOpen(B).jar
+		
+		* Open CMD go to drectory of XXX.jar use Command
+			
+		```sh
+		 java -jar XXX.jar
+		```
+		 
+		* Enter absolute path of CourseDetail.txt
+		
+		```sh
+		C:\Users\user\Document\CourseDetail.txt
+		```
   
-  ## Usage
+		* Enter absolute path of CourseSection.txt
+		
+		```sh
+		C:\Users\user\Document\CourseSection.txt
+		```
+		
+	   	
+5. Choose Lecture Section for a course
+6. Choose Lab Section for a course(if any)
+7. Repeat until done select all course.
+8. Reminder: There are posible not availble section, that's mean you need to choose other section for previous course.
+   
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+  
+
+  ## Format of txt
+  
+  * Every part separate by a "space bar"
+  
+  * Next line for new course
+  
+  * No extra empty line
+  
+  * The order of course will be the order of select section for course
+  
   
   ### Format of Content CourseDetail.txt
   
+	  Course: Mathematic
+	  
+	  Code: BPA11303 
+	  
+	  Credit Hour: 3
+	  
+	  Exam: 2020/3/13
   
-  CourseCode CourseName CreditHour YearExam MonthExam DateExam
-  ___
-  BPA11303 PM 3 2021 3 13
   
-  BPB14203 BFM 3 2021 3 14
+	  Course: Sciences
+	  
+	  Code: BPB14203 
+	  
+	  Credit Hour: 3
+	  
+	  Exam: 2020/3/14
+  
+  
+   #### Content in CourseDetail.txt:
+  
+	Order: CourseCode CourseName CreditHour YearExam MonthExam DateExam
   ___
+  BPA11303 Mathematic 3 2021 3 13
+  
+  BPB14203 Sciences 3 2021 3 14
+  ___
+  
   
   ### Format of Content CourseSection.txt
   
-  SectionName/Number CourseCode Type(1 for lecture 0 for lab) DayOfWeek(0 to 4 reprensent Monday To Thursday) HourStart HourEnd
+	  Code: BPB14203 
+	  
+	  Section: 01
+	  
+	  Type: Lecture (1 for lecture; 0 for lab)
+	  
+	  Day Of Week: Tuesday (0 to 4 reprensent Monday To Friday for Group B) (0 to 4 reprensent Sunday To Thursday for Group B) 
+	  
+	  Time Start: 1400
+	  
+	  Time End: 1700
+  
+  
+	  Code: BPB14203 
+	  
+	  Section: 01A
+	  
+	  Type: Lab (1 for lecture; 0 for lab)
+	  
+	  Day Of Week: Tuesday ( 0 to 4 reprensent Monday To Friday for Group B) ( 0 to 4 reprensent Sunday To Thursday for Group B) 
+	  
+	  Time Start: 1400
+	  
+	  Time End: 1700
+  
+  #### Content in CourseDetail.txt:
+  
+	Order: SectionName/Number CourseCode Type DayOfWeek HourStart HourEnd
   ___
   01 BPA11303 1 1 14 17
   
@@ -93,11 +180,14 @@ A system can help student especially University Malaysia Pahang(UMP) to make a t
   
   <p align="right">(<a href="#top">back to top</a>)</p>
   
-  ## License
+  
+## License 
+
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+
+  <p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
