@@ -4,7 +4,7 @@
 # TimeTableHelper
 A system can help student especially student in University Malaysia Pahang(UMP) to make a time table before going register [OpenCourse Registration System(OR)](https://or.ump.edu.my/or/index.jsp)
 
-As a UMP Student, please download in [Group B](###-Group-B)
+As a UMP Student, please download in [Group B](#group-b)
 
 
  ## Getting Started
