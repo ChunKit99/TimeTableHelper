@@ -7,6 +7,7 @@ public class Subject {
     public String id;//code subject, exmple ABC1234
     private String type;//"Lecture" or "Lab"
     private int dayWeek;
+    private String dayName = "";
     private LocalTime timeStart;
     private LocalTime timeEnd;
 
@@ -23,7 +24,7 @@ public class Subject {
         this.timeEnd = timeEnd;
     }
 
-    public Subject(String id, int typeIndex, int dayWeek, LocalTime timeStart, LocalTime timeEnd) {
+    public Subject(String id, int typeIndex, int dayWeek, LocalTime timeStart, LocalTime timeEnd, String category) {
         super();
         this.id = id;
         if (typeIndex == 1) {
@@ -34,24 +35,42 @@ public class Subject {
         this.dayWeek = dayWeek;
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
+        this.dayName = findDayName(category);
     }
-
+    
     public String getDayName() {
+    	return dayName;
+    }
+    
+    public void setDayName(String dayName) {
+    	this.dayName = dayName;
+    }
+    
+    public String findDayName(String category) {
         String day = "";
-        switch (dayWeek) {
-            case 0:
+        int index;
+        if(category.equals("A")){
+        	index = dayWeek;
+        }else {//cat B
+        	index = dayWeek+1;
+        }
+        switch (index) {
+        	case 0:
+        		day = "Sunday";
+        		break;
+            case 1:
                 day = "Monday";
                 break;
-            case 1:
+            case 2:
                 day = "Tuesday";
                 break;
-            case 2:
+            case 3:
                 day = "Wednesday";
                 break;
-            case 3:
+            case 4:
                 day = "Thursday";
                 break;
-            case 4:
+            case 5:
                 day = "Friday";
                 break; 
         }

@@ -6,8 +6,13 @@ public class TimeTable {
 
     public Day[] days = new Day[5];
 
-    public TimeTable() {
-        days = createDays();
+    public TimeTable(String category) {
+    	if(category.equals("A")) {
+    		days = createDays2();
+    	}else {
+    		days = createDays();
+    	}
+        
     }
 
     public void dropAllCourse() {
@@ -17,18 +22,19 @@ public class TimeTable {
     }
 
     public boolean assignTimeTable(ArrayList<Course> courseToAdd) {
+    	boolean assign = true;
         for (int i = 0; i < courseToAdd.size(); i++) {//loop the course to add
             int dayIndex = courseToAdd.get(i).getSection().getSubject().getDayWeek();
             for (int j = 0; j < days[dayIndex].timePeriod.length; j++) {//loop period in a day
                 if (days[dayIndex].timePeriod[j].isInRange(courseToAdd.get(i))) {//in range
                     if (days[dayIndex].timePeriod[j].setCourseDetail(courseToAdd.get(i))) {
                     } else {//fail to add because clash time
-                        return false;
+                    	assign = false;
                     }
                 }
             }
         }
-        return true;
+        return assign;
     }
 
     public void showTimeTable() {

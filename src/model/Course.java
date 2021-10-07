@@ -20,7 +20,7 @@ public class Course {
     }
 
     public String display() {
-        return courseDetail.getID() + " " + courseDetail.getName() + " Section " + section.id;
+        return courseDetail.getID() + " " + courseDetail.getName() + " Section " + section.id+ " Exam: " + courseDetail.getDateOfExam().toString();
     }
     public String displayFull() {
         return "" + courseDetail.getID() + " " + courseDetail.getName() + " Section " + section.id
@@ -30,7 +30,7 @@ public class Course {
     @Override
     public String toString(){
         return "" + courseDetail.getID() + " " + courseDetail.getName() + " Section " + section.id
-                + " " + section.getSubject().getType() + " Exam: " + courseDetail.getDateOfExam().toString();
+                + " " + section.getSubject().getType() ;
     }
     
     public CourseDetail getCourseDetail() {
