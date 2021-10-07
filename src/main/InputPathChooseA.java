@@ -62,8 +62,10 @@ public class InputPathChooseA {
 							+ " " + myTimeTableApp.buffersection.get(j).getSubject().getDayName() + " "
 							+ myTimeTableApp.buffersection.get(j).getSubject().getTimeStart() + " "
 							+ myTimeTableApp.buffersection.get(j).getSubject().getTimeEnd());
+				}else {
+					//let timeperiod know day name
+					myTimeTableApp.buffersection.get(j).getSubject().getDayName();
 				}
-
 			}
 			System.out.println("");
 			// ready to know which lecture section need to add
@@ -218,7 +220,7 @@ public class InputPathChooseA {
 	 */
 	public void addSection(String sectionID, String codeCourse, int type, int day, int start, int end) {
 		sectionToAdd.add(new Section(sectionID,
-				new Subject(codeCourse, type, day, LocalTime.of(start, 0), LocalTime.of(end, 0))));
+				new Subject(codeCourse, type, day, LocalTime.of(start, 0), LocalTime.of(end, 0), category)));
 	}
 
 	public void createAllCourse() {

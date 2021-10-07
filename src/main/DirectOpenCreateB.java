@@ -45,8 +45,8 @@ public class DirectOpenCreateB {
     }
 
     public void loadFile() {
-	    String javaCourseDetail = "CourseDetail.txt";
-	    String javaCourseSection = "CourseSection.txt";
+    	String javaCourseDetail = "C:\\Users\\Asus\\Videos\\TestTB\\CourseDetail.txt";
+	    String javaCourseSection = "C:\\Users\\Asus\\Videos\\TestTB\\CourseSection.txt";
 		try {
 			System.out.println("\nLoading...");
 			File f1 = new File(javaCourseDetail);
@@ -125,7 +125,7 @@ public class DirectOpenCreateB {
 
     //type: 1 == Lecture 2 == Lab
     public void addSection(String sectionID, String codeCourse, int type, int day, int start, int end) {
-        sectionToAdd.add(new Section(sectionID, new Subject(codeCourse, type, day, LocalTime.of(start, 0), LocalTime.of(end, 0))));
+        sectionToAdd.add(new Section(sectionID, new Subject(codeCourse, type, day, LocalTime.of(start, 0), LocalTime.of(end, 0), category)));
     }
 
     public void createCourseToAdd() {
