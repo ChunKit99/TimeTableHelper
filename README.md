@@ -2,7 +2,10 @@
 
 
 # TimeTableHelper
-A system can help student especially University Malaysia Pahang(UMP) to make a time table before going to OpenCourse Registration System(OR)
+A system can help student especially student in University Malaysia Pahang(UMP) to make a time table before going register [OpenCourse Registration System(OR)](https://or.ump.edu.my/or/index.jsp)
+
+As a UMP Student, please download in [Group B](###-Group-B)
+
 
  ## Getting Started
 
@@ -29,15 +32,14 @@ A system can help student especially University Malaysia Pahang(UMP) to make a t
   
 Negeri Johor, Kedah, Kelantan & Terenganu
 	
-Download : DirectOpenChooseA.jar | DirectOpenCreateA.jar | InputPathChooseA.jar
+Download : [DirectOpenChooseA.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/DirectOpenChooseA.jar) | [DirectOpenCreateA.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/DirectOpenCreateA.jar) | [InputPathChooseA.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/InputPathChooseA.jar)
 	
   
 ### Group B
   
 Negeri Perlis, Pulau Pinang, Perak, Selangor, Negeri Sembilan, Melaka, Pahang, Sabah, Sarawak, Wilayah Persekutuan Kuala Lumpur, Labuan & Putrajaya
 
-	
-Download : DirectOpenChooseA.jar | DirectOpenCreateA.jar | InputPathChooseA.jar
+Download : [DirectOpenChooseB.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/DirectOpenChooseB.jar) | [DirectOpenCreateB.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/DirectOpenCreateB.jar) | [InputPathChooseB.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/InputPathChooseB.jar)
 	
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -51,12 +53,12 @@ Download : DirectOpenChooseA.jar | DirectOpenCreateA.jar | InputPathChooseA.jar
 
 
 ### Step of Usage
-1. Ready CourseDetail.txt
-2. Ready CourseSection.txt
+1. Prepare CourseDetail.txt
+2. Prepare CourseSection.txt
 3. Download XXX.jar
 
 4. 
-   * DirectOpenCreateA.jar OR DirectOpenCreateB.jar 
+   * [DirectOpenCreateA.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/DirectOpenCreateA.jar) OR [DirectOpenCreateB.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/DirectOpenChooseB.jar)
      * Desription: Directly generate Time Table
      * Only put section(including Lecture or Lab) that need to create time table in CourseDetail.txt and CourseSection.txt
      * Save CourseDetail.txt and CourseSection.txt in SAME DIRECTORY of XXX.jar
@@ -68,7 +70,7 @@ Download : DirectOpenChooseA.jar | DirectOpenCreateA.jar | InputPathChooseA.jar
      * The time table should be come out if all thing correct		
 	
   
-   * DirectOpenChooseA.jar OR DirectOpenChooseB.jar 
+   * [DirectOpenChooseA.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/DirectOpenChooseA.jar) OR [DirectOpenChooseB.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/DirectOpenChooseA.jar)
      * Desription: Without enter any path and can start to select course
      * Put all section(including Lecture or Lab) that posible to create time table in CourseDetail.txt and CourseSection.txt
      * Open CMD in the drectory of XXX.jar and use Command
@@ -81,7 +83,7 @@ Download : DirectOpenChooseA.jar | DirectOpenCreateA.jar | InputPathChooseA.jar
      * The time table should be come out if all thing correct
 
 
-   * InputPathChooseA.jar OR InputPathChooseB.jar
+   * [InputPathChooseA.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/InputPathChooseA.jar) OR [InputPathChooseB.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/InputPathChooseB.jar)
      * Desription: Need to enter path of CourseDetail.txt and CourseSection.txt to select course
        * For other directory: absolute path for txt file
        * Same Directory: filename like: "CourseDetail.txt"
