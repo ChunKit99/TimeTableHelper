@@ -6,6 +6,8 @@ A system can help student especially student in University Malaysia Pahang(UMP) 
 
 As a UMP Student, please download in [Group B](#group-b)
 
+For other university student, the method of registration may different. However, it still can use for "Direct Generate Time Table", view `DirectOpenCreateA.jar` OR `DirectOpenCreateB.jar`
+
 
  ## Getting Started
 
@@ -32,14 +34,14 @@ As a UMP Student, please download in [Group B](#group-b)
   
 Negeri Johor, Kedah, Kelantan & Terenganu
 	
-Download : [DirectOpenChooseA.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/DirectOpenChooseA.jar) | [DirectOpenCreateA.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/DirectOpenCreateA.jar) | [InputPathChooseA.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/InputPathChooseA.jar)
+Download : `DirectOpenChooseA.jar` | `DirectOpenCreateA.jar` | `InputPathChooseA.jar`
 	
   
 ### Group B
   
 Negeri Perlis, Pulau Pinang, Perak, Selangor, Negeri Sembilan, Melaka, Pahang, Sabah, Sarawak, Wilayah Persekutuan Kuala Lumpur, Labuan & Putrajaya
 
-Download : [DirectOpenChooseB.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/DirectOpenChooseB.jar) | [DirectOpenCreateB.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/DirectOpenCreateB.jar) | [InputPathChooseB.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/InputPathChooseB.jar)
+Download : 	`DirectOpenChooseB.jar` | `DirectOpenCreateB.jar` | `InputPathChooseB.jar`
 	
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -58,9 +60,10 @@ Download : [DirectOpenChooseB.jar](https://github.com/ChunKit99/TimeTableHelper/
 3. Download XXX.jar
 
 4. 
-   * [DirectOpenCreateA.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/DirectOpenCreateA.jar) OR [DirectOpenCreateB.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/DirectOpenChooseB.jar)
+   * `DirectOpenCreateA.jar` OR `DirectOpenCreateB.jar`
      * Desription: Directly generate Time Table
      * Only put section(including Lecture or Lab) that need to create time table in CourseDetail.txt and CourseSection.txt
+	 * File name must exactly using "CourseDetail.txt" and "CourseSection.txt"
      * Save CourseDetail.txt and CourseSection.txt in SAME DIRECTORY of XXX.jar
      * Open CMD in the drectory of XXX.jar and use Command
      
@@ -70,8 +73,9 @@ Download : [DirectOpenChooseB.jar](https://github.com/ChunKit99/TimeTableHelper/
      * The time table should be come out if all thing correct		
 	
   
-   * [DirectOpenChooseA.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/DirectOpenChooseA.jar) OR [DirectOpenChooseB.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/DirectOpenChooseA.jar)
+   * `DirectOpenChooseA.jar` OR `DirectOpenChooseB.jar`
      * Desription: Without enter any path and can start to select course
+	 * File name must exactly using "CourseDetail.txt" and "CourseSection.txt"
      * Put all section(including Lecture or Lab) that posible to create time table in CourseDetail.txt and CourseSection.txt
      * Open CMD in the drectory of XXX.jar and use Command
      
@@ -83,10 +87,9 @@ Download : [DirectOpenChooseB.jar](https://github.com/ChunKit99/TimeTableHelper/
      * The time table should be come out if all thing correct
 
 
-   * [InputPathChooseA.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/InputPathChooseA.jar) OR [InputPathChooseB.jar](https://github.com/ChunKit99/TimeTableHelper/blob/main/InputPathChooseB.jar)
+   * `InputPathChooseA.jar` OR `InputPathChooseB.jar`
      * Desription: Need to enter path of CourseDetail.txt and CourseSection.txt to select course
-       * For other directory: absolute path for txt file
-       * Same Directory: filename like: "CourseDetail.txt"
+	 * File name is free to naming
      * Open CMD in the drectory of XXX.jar and use Command
      
        ```sh
@@ -94,7 +97,10 @@ Download : [DirectOpenChooseB.jar](https://github.com/ChunKit99/TimeTableHelper/
        ```
       * Enter path of file Course Detail
       * Enter path of file Course Section
-	
+		* For other directory: absolute path for txt file, example:"C:\User\Document\CourseDetail.txt"
+		* Same Directory: enter filename only, example: "CourseDetail.txt"
+		
+		
 <p align="right">(<a href="#top">back to top</a>)</p>
 
   
@@ -119,7 +125,11 @@ Download : [DirectOpenChooseB.jar](https://github.com/ChunKit99/TimeTableHelper/
 	  
 	  Credit Hour: 3
 	  
-	  Exam: 2020/3/13
+	  isExam: Y(Yes)
+	  
+	  Exam: 2022-02-16(yyyy/mm/dd)
+	  
+	  DayTimeExam: AM (AM/PM)
   
   
 	  Course: Sciences
@@ -128,15 +138,15 @@ Download : [DirectOpenChooseB.jar](https://github.com/ChunKit99/TimeTableHelper/
 	  
 	  Credit Hour: 3
 	  
-	  Exam: 2020/3/14
+	  isExam: N(YNo)
   
   
    #### Content in CourseDetail.txt
   
 	Order: CourseCode CourseName CreditHour YearExam MonthExam DateExam
   ___
-	BPA11303 Mathematic 3 2021 3 13
-	BPB14203 Sciences 3 2021 3 14
+	BPA11303 Mathematic 3 Y 2022-02-16 AM
+	BPB14203 Sciences 3 N
   ___
   
   
