@@ -45,8 +45,8 @@ public class DirectOpenCreateB {
     }
 
     public void loadFile() {
-    	String javaCourseDetail = "C:\\Users\\Asus\\Videos\\TestTB\\CourseDetail.txt";
-	    String javaCourseSection = "C:\\Users\\Asus\\Videos\\TestTB\\CourseSection.txt";
+	    String javaCourseDetail = "CourseDetail.txt";
+	    String javaCourseSection = "CourseSection.txt";
 		try {
 			System.out.println("\nLoading...");
 			File f1 = new File(javaCourseDetail);
@@ -54,14 +54,18 @@ public class DirectOpenCreateB {
 			while (dataReader.hasNextLine()) {
 				String fileData = dataReader.nextLine();
 				String str[] = fileData.split(" ");
-				if (str.length != 6) {// means format wrong
-					System.out.println("\nWarning Course Detail!");
-					System.out.println("Error at Line :" + fileData);
-					isErrorFileCourseDetail = true;
-				} else {
-					addCourseDetail(str[0], str[1], Integer.parseInt(str[2]), Integer.parseInt(str[3]),
-							Integer.parseInt(str[4]), Integer.parseInt(str[5]));
-					totalCredit += Integer.parseInt(str[2]);
+				if (str.length != 6) {//total lenth = 6
+					if(str.length == 4) {//code(0) name(1) credit(2) y/n(3) date(4) AM/PM(5)
+						if(str[3].equals("N")) {//no exam
+							addCourseDetail(str[0], str[1], Integer.parseInt(str[2]));
+						}else {// should have exam but only have 4 part
+							System.out.println("\nWarning Course Detail!");
+							System.out.println("Error at Line :" + fileData);
+							isErrorFileCourseDetail = true;
+						}
+					}
+				} else {//str.length == 6
+					addCourseDetail(str[0], str[1], Integer.parseInt(str[2]), LocalDate.parse(str[4]), str[5]);//skip str[3], it's indexExam
 				}
 			}
 			dataReader.close();
@@ -119,9 +123,13 @@ public class DirectOpenCreateB {
 		}
 	}
 
-	public void addCourseDetail(String codeCourse, String nameCourse, int creditHour, int year, int month, int date) {
-        myCourse.add(new CourseDetail(codeCourse, nameCourse, creditHour, LocalDate.of(year, Month.of(month), date)));
-    }
+	public void addCourseDetail(String codeCourse, String nameCourse, int creditHour) {
+		myCourse.add(new CourseDetail(codeCourse, nameCourse, creditHour));
+	}
+	
+	public void addCourseDetail(String codeCourse, String nameCourse, int creditHour, LocalDate date, String dayTime) {
+		myCourse.add(new CourseDetail(codeCourse, nameCourse, creditHour, date, dayTime));
+	}
 
     //type: 1 == Lecture 2 == Lab
     public void addSection(String sectionID, String codeCourse, int type, int day, int start, int end) {
@@ -143,7 +151,7 @@ public class DirectOpenCreateB {
     public boolean assignCourseTimeTable() {
         if (courseToAdd.isEmpty()) {//empty
             //skip
-            System.out.println("Empty List, Please Add Course");
+			System.out.println("Empty List, Fail To Assign!");
             return false;
         } else {
         	System.out.println("Assigning Time Table...");
@@ -151,7 +159,7 @@ public class DirectOpenCreateB {
                 System.out.println("Done Assign!");
                 return true;
             } else {
-                System.out.println("Fail To Assign!");
+				System.out.println("Fail To Assign! Please Try Other Combination of Section.");
                 return false;
             }
         }

@@ -34,10 +34,9 @@ public class TimePeriod {
             if (courseToAdd.equals(course)) {//same course for add
                 //skip
             } else {
-                System.out.println("\nFailed To Add, This Time Slot is Added Before!");
-                //System.out.println("Day of Week: " + (courseToAdd.getSection().getSubject().getDayWeek() + 1));
+                System.out.println("\nFailed To Add, This Time Slot is Added Before!\n");
                 System.out.println("Day of Week: " + (courseToAdd.getSection().getSubject().getDayName()));
-                System.out.println("Time :" + timeStart.toString() + " - " + timeEnd.toString());
+                System.out.println("Time Slot:" + timeStart.toString() + " - " + timeEnd.toString());
                 System.out.println("Course Added: " + course.displayFull());
                 System.out.println("Current to Add: " + courseToAdd.displayFull());
                 System.out.println("");
