@@ -1,5 +1,5 @@
-BCI2313 AlgoComplex 3 2022 2 16
-BCN2023 DataNetworkSecuity 3 2022 2 16
-BCN2093 NetAnalysDesign 3 2022 2 11
-BCN3043 NetSetvirAdmin 3 2022 2 9
-BCN3203 WanTech 3 2022 2 10
+BCI2313 AlgoComplex 3 Y 2022-02-16 AM
+BCN2023 DataNetworkSecuity 3 Y 2022-02-16 AM
+BCN2093 NetAnalysDesign 3 Y 2022-02-11 PM
+BCN3043 NetSetvirAdmin 3 Y 2022-02-09 AM
+BCN3203 WanTech 3 N

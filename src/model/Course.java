@@ -7,46 +7,63 @@ package model;
  */
 public class Course {
 
-    private CourseDetail courseDetail;
-    private Section section;
+	private CourseDetail courseDetail;
+	private Section section;
 
-    public Course(CourseDetail courseDetail, Section section) {
-        this.courseDetail = courseDetail;
-        this.section = section;
-    }
+	public Course(CourseDetail courseDetail, Section section) {
+		this.courseDetail = courseDetail;
+		this.section = section;
+	}
 
-    public Course() {
+	public Course() {
 
-    }
+	}
+	
+	//Time table display
+	public String display() {
+		if(courseDetail.isExam()) {
+			return courseDetail.getID() + " " + courseDetail.getName() + " Section " + section.id + " Final Exam: "
+					+ courseDetail.getDateOfExam().toString() + " "+ courseDetail.getDayTime();
+		}else {
+			return courseDetail.getID() + " " + courseDetail.getName() + " Section " + section.id + " Final Exam: NO";
+		}
+		
+	}
+	
+	//error display when assign to time table
+	public String displayFull() {
+		if(courseDetail.isExam()) {
+			return "" + courseDetail.getID() + " " + courseDetail.getName() + " Section " + section.id + " "
+					+ section.getSubject().getType() + " " + section.getSubject().getTimeStart() + " To "
+					+ section.getSubject().getTimeEnd() + " Final Exam: " + courseDetail.getDateOfExam().toString()
+					+ " " + courseDetail.getDayTime();
+		}else {
+			return "" + courseDetail.getID() + " " + courseDetail.getName() + " Section " + section.id + " "
+					+ section.getSubject().getType() + " " + section.getSubject().getTimeStart() + " To "
+					+ section.getSubject().getTimeEnd();
+		}	
+	}
 
-    public String display() {
-        return courseDetail.getID() + " " + courseDetail.getName() + " Section " + section.id+ " Exam: " + courseDetail.getDateOfExam().toString();
-    }
-    public String displayFull() {
-        return "" + courseDetail.getID() + " " + courseDetail.getName() + " Section " + section.id
-                + " " + section.getSubject().getType() + " " + section.getSubject().getTimeStart()
-                + " To " + section.getSubject().getTimeEnd() + " Exam: " + courseDetail.getDateOfExam().toString();
-    }
-    @Override
-    public String toString(){
-        return "" + courseDetail.getID() + " " + courseDetail.getName() + " Section " + section.id
-                + " " + section.getSubject().getType() ;
-    }
-    
-    public CourseDetail getCourseDetail() {
-        return courseDetail;
-    }
+	@Override
+	public String toString() {
+		return "" + courseDetail.getID() + " " + courseDetail.getName() + " Section " + section.id + " "
+				+ section.getSubject().getType();
+	}
 
-    public Section getSection() {
-        return section;
-    }
+	public CourseDetail getCourseDetail() {
+		return courseDetail;
+	}
 
-    public void setCourseDetail(CourseDetail courseDetail) {
-        this.courseDetail = courseDetail;
-    }
+	public Section getSection() {
+		return section;
+	}
 
-    public void setSection(Section section) {
-        this.section = section;
-    }
+	public void setCourseDetail(CourseDetail courseDetail) {
+		this.courseDetail = courseDetail;
+	}
+
+	public void setSection(Section section) {
+		this.section = section;
+	}
 
 }

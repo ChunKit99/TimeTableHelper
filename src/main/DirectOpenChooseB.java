@@ -67,9 +67,9 @@ public class DirectOpenChooseB {
 			System.out.println("");
 			// ready to know which lecture section need to add
 			if (numAvailableLecture == 0) {// means no available list for lecture
-				System.out.println("\nEmpty Availble Lecture Section For " + myTimeTableApp.myCourse.get(i).getID()
+				System.out.println("\nEmpty Availble Lecture Section: " + myTimeTableApp.myCourse.get(i).getID()
 						+ " " + myTimeTableApp.myCourse.get(i).getName()
-						+ "!! You Need To Choose Another Section For Previous Course "
+						+ "\nYou Need To Choose Another Section For Previous Course: "
 						+ myTimeTableApp.myCourse.get(i - 1).getID() + " "
 						+ myTimeTableApp.myCourse.get(i - 1).getName());
 			} else {
@@ -96,16 +96,13 @@ public class DirectOpenChooseB {
 										+ " " + myTimeTableApp.buffersection2.get(k).getSubject().getDayName() + " "
 										+ myTimeTableApp.buffersection2.get(k).getSubject().getTimeStart() + " "
 										+ myTimeTableApp.buffersection2.get(k).getSubject().getTimeEnd());
-					}else {
-						//let timeperiod know day name
-						myTimeTableApp.buffersection2.get(k).getSubject().getDayName();
 					}
 				}
 				if (!myTimeTableApp.buffersection2.isEmpty()) {// there have match lab form the lecture select
 					if (numLabAvailable == 0) {// means no time lab section is available
 						System.out.println("\nEmpty Availble Lab Section For " + myTimeTableApp.myCourse.get(i).getID()
 								+ " " + myTimeTableApp.myCourse.get(i).getName()
-								+ "!! You Need To Choose Another Section For Previous Course "
+								+ "\nYou Need To Choose Another Section For Previous Course "
 								+ myTimeTableApp.myCourse.get(i - 1).getID() + " "
 								+ myTimeTableApp.myCourse.get(i - 1).getName());
 						// remove last courseToAdd because lab section of the lecture course crash time;
@@ -144,13 +141,18 @@ public class DirectOpenChooseB {
 			while (dataReader.hasNextLine()) {
 				String fileData = dataReader.nextLine();
 				String str[] = fileData.split(" ");
-				if (str.length != 6) {// means format wrong
-					System.out.println("\nWarning Course Detail!");
-					System.out.println("Error at Line :" + fileData);
-					isErrorFileCourseDetail = true;
-				} else {
-					addCourseDetail(str[0], str[1], Integer.parseInt(str[2]), Integer.parseInt(str[3]),
-							Integer.parseInt(str[4]), Integer.parseInt(str[5]));
+				if (str.length != 6) {//total lenth = 6
+					if(str.length == 4) {//code(0) name(1) credit(2) y/n(3) date(4) AM/PM(5)
+						if(str[3].equals("N")) {//no exam
+							addCourseDetail(str[0], str[1], Integer.parseInt(str[2]));
+						}else {// should have exam but only have 4 part
+							System.out.println("\nWarning Course Detail!");
+							System.out.println("Error at Line :" + fileData);
+							isErrorFileCourseDetail = true;
+						}
+					}
+				} else {//str.length == 6
+					addCourseDetail(str[0], str[1], Integer.parseInt(str[2]), LocalDate.parse(str[4]), str[5]);//skip str[3], it's indexExam
 				}
 			}
 			dataReader.close();
@@ -208,8 +210,12 @@ public class DirectOpenChooseB {
 		}
 	}
 
-	public void addCourseDetail(String codeCourse, String nameCourse, int creditHour, int year, int month, int date) {
-		myCourse.add(new CourseDetail(codeCourse, nameCourse, creditHour, LocalDate.of(year, Month.of(month), date)));
+	public void addCourseDetail(String codeCourse, String nameCourse, int creditHour) {
+		myCourse.add(new CourseDetail(codeCourse, nameCourse, creditHour));
+	}
+	
+	public void addCourseDetail(String codeCourse, String nameCourse, int creditHour, LocalDate date, String dayTime) {
+		myCourse.add(new CourseDetail(codeCourse, nameCourse, creditHour, date, dayTime));
 	}
 
 	/*
@@ -295,7 +301,7 @@ public class DirectOpenChooseB {
 				System.out.println("Done Assign!");
 				return true;
 			} else {
-				System.out.println("Fail To Assign! Please Try Other Section.");
+				System.out.println("Fail To Assign! Please Try Other Combination of Section.");
 				return false;
 			}
 		}
@@ -303,9 +309,9 @@ public class DirectOpenChooseB {
 
 	public void showAllCourseToAddDetail() {
 		System.out.println("\n");
-		System.out.println("Total Credit Hour: " + totalCredit);
+		System.out.println("Total Credit Hour Added: " + totalCredit);
 		System.out.println("Number Subject Should Add: " + myCourse.size());
-		System.out.println("Number Subject To Add: " + totalSubjectRegister);
+		System.out.println("Number Subject Added: " + totalSubjectRegister);
 		System.out.print("Is Done To Add All Subject?: ");
 		if(myCourse.size()!=totalSubjectRegister) {
 			System.out.println("No!!");
