@@ -1,0 +1,56 @@
+
+Monday
+08:00 - 08:50
+09:00 - 09:50
+10:00 - 10:50
+11:00 - 11:50
+12:00 - 12:50
+13:00 - 13:50
+14:00 - 14:50 BCN2093 NetAnalysDesign Section 02B Lab
+15:00 - 15:50 BCN2093 NetAnalysDesign Section 02B Lab
+16:00 - 16:50 BCN2023 DataNetworkSecuity Section 02B Lab
+17:00 - 17:50 BCN2023 DataNetworkSecuity Section 02B Lab
+Tuesday
+08:00 - 08:50 BCN2023 DataNetworkSecuity Section 02 Lecture
+09:00 - 09:50 BCN2023 DataNetworkSecuity Section 02 Lecture
+10:00 - 10:50 BCN2093 NetAnalysDesign Section 02 Lecture
+11:00 - 11:50 BCN2093 NetAnalysDesign Section 02 Lecture
+12:00 - 12:50 BCN3043 NetSetvirAdmin Section 01B Lab
+13:00 - 13:50 BCN3043 NetSetvirAdmin Section 01B Lab
+14:00 - 14:50 BCI2313 AlgoComplex Section 03B Lab
+15:00 - 15:50 BCI2313 AlgoComplex Section 03B Lab
+16:00 - 16:50
+17:00 - 17:50
+Wednesday
+08:00 - 08:50
+09:00 - 09:50
+10:00 - 10:50
+11:00 - 11:50
+12:00 - 12:50
+13:00 - 13:50
+14:00 - 14:50
+15:00 - 15:50
+16:00 - 16:50
+17:00 - 17:50
+Thursday
+08:00 - 08:50 BCN3203 WanTech Section 01 Lecture
+09:00 - 09:50
+10:00 - 10:50 BCI2313 AlgoComplex Section 03 Lecture
+11:00 - 11:50 BCI2313 AlgoComplex Section 03 Lecture
+12:00 - 12:50
+13:00 - 13:50
+14:00 - 14:50 BCN3203 WanTech Section 01B Lab
+15:00 - 15:50 BCN3203 WanTech Section 01B Lab
+16:00 - 16:50 BCN3203 WanTech Section 01B Lab
+17:00 - 17:50
+Friday
+08:00 - 08:50
+09:00 - 09:50
+10:00 - 10:50 BCN3043 NetSetvirAdmin Section 01 Lecture
+11:00 - 11:50 BCN3043 NetSetvirAdmin Section 01 Lecture
+12:00 - 12:50
+13:00 - 13:50
+14:00 - 14:50
+15:00 - 15:50
+16:00 - 16:50
+17:00 - 17:50

@@ -19,7 +19,7 @@ public class Course {
 
 	}
 	
-	//Time table display
+	//Show Course to add
 	public String display() {
 		if(courseDetail.isExam()) {
 			return courseDetail.getID() + " " + courseDetail.getName() + " Section " + section.id + " Final Exam: "
@@ -40,10 +40,11 @@ public class Course {
 		}else {
 			return "" + courseDetail.getID() + " " + courseDetail.getName() + " Section " + section.id + " "
 					+ section.getSubject().getType() + " " + section.getSubject().getTimeStart() + " To "
-					+ section.getSubject().getTimeEnd();
+					+ section.getSubject().getTimeEnd() +  " Final Exam: NO";
 		}	
 	}
-
+	
+	// show in time table
 	@Override
 	public String toString() {
 		return "" + courseDetail.getID() + " " + courseDetail.getName() + " Section " + section.id + " "

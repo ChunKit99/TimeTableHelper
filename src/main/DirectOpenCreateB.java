@@ -3,6 +3,8 @@ package main;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 /**
  * direct create time table, if repeat time happen will fail to create
  *
@@ -40,11 +42,12 @@ public class DirectOpenCreateB {
             //show time table
             System.out.println("\nTime Table:\n");
             myTimeTableApp.myTimeTable.showTimeTable();
+            myTimeTableApp.exportFile();
         }
 
     }
 
-    public void loadFile() {
+	public void loadFile() {
 	    String javaCourseDetail = "CourseDetail.txt";
 	    String javaCourseSection = "CourseSection.txt";
 		try {
@@ -183,5 +186,46 @@ public class DirectOpenCreateB {
             }
         }
     }
+
+	public void exportFile() {
+		try {
+			File myObj = new File("MyTimeTable.txt");
+			System.out.println("\nCreating File...");
+			if (myObj.createNewFile()) {
+				System.out.println("File created: " + myObj.getName());
+				writeFile();
+				System.out.println("\nDone Export! ");
+				System.out.println("File Path: " + myObj.getAbsolutePath());
+			} else {
+				System.out.println("But File already exists.");
+					System.out.println("\nDeleting...");
+					removeFile();
+					exportFile();
+			}
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+	}
+
+	public void removeFile() {
+		File myObj = new File("MyTimeTable.txt");
+		if (myObj.delete()) {
+			System.out.println("Deleted the file: " + myObj.getName());
+		} else {
+			System.out.println("Failed to delete the file.");
+		}
+	}
+
+	public void writeFile() {
+		try {
+			FileWriter myWriter = new FileWriter("MyTimeTable.txt");
+			myWriter.write(myTimeTable.returnShowTimeTable());
+			myWriter.close();
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+	}
   
 }

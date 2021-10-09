@@ -23,10 +23,10 @@ import java.io.IOException;
 
 import model.*;
 
-public class DirectOpenInputChooseB {
+public class DirectOpenInputChooseA {
 
 	static Scanner sc = new Scanner(System.in);
-	String category = "B";
+	String category = "A";
 	ArrayList<CourseDetail> myCourse = new ArrayList<CourseDetail>();// save course detail from txt
 	ArrayList<Section> sectionToAdd = new ArrayList<Section>();// save course section from txt
 	ArrayList<Course> courseToAdd = new ArrayList<Course>();// save course(lecture and lab) will add into time table
@@ -44,7 +44,7 @@ public class DirectOpenInputChooseB {
 	int totalCredit = 0, totalSubjectRegister = 0;
 
 	public static void main(String[] args) {
-		DirectOpenInputChooseB myTimeTableApp = new DirectOpenInputChooseB();
+		DirectOpenInputChooseA myTimeTableApp = new DirectOpenInputChooseA();
 		int indexSectionLecture, indexSectionLab;
 		myTimeTableApp.loadFile();
 		myTimeTableApp.checkFormatFileLoaded();

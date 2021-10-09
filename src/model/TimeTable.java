@@ -50,6 +50,22 @@ public class TimeTable {
             }
         }
     }
+    
+    public String returnShowTimeTable() {
+    	String returnString = "";
+        for (int i = 0; i < 5; i++) {
+            returnString = returnString + "\n" + days[i].name;
+            for (int j = 0; j < days[i].numOfSlot; j++) {
+                if(days[i].timePeriod[j].course!=null){
+                	returnString = returnString + "\n" + days[i].timePeriod[j].timeStart + " - " + days[i].timePeriod[j].timeEnd + " "
+                        + days[i].timePeriod[j].course;
+                }else{
+                	returnString = returnString + "\n" + days[i].timePeriod[j].timeStart + " - " + days[i].timePeriod[j].timeEnd;
+                }
+            }
+        }
+        return returnString;
+    }
 
     public Day[] createDays2() {//if Study from Sunday to Thursday
         Day[] day = new Day[5];
