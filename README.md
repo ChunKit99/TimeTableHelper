@@ -16,7 +16,9 @@ For other university student, the method of registration may different. However,
   
 ### Group A
   
-Negeri Johor, Kedah, Kelantan & Terenganu
+Negeri Johor, Kedah, Kelantan & Terenganu\
+
+The Day of week will start from Sunday to Thursday
 	
 Download : `DirectOpenCreateA.jar` | `OpneChooseA.jar`
 	
@@ -24,6 +26,8 @@ Download : `DirectOpenCreateA.jar` | `OpneChooseA.jar`
 ### Group B
   
 Negeri Perlis, Pulau Pinang, Perak, Selangor, Negeri Sembilan, Melaka, Pahang, Sabah, Sarawak, Wilayah Persekutuan Kuala Lumpur, Labuan & Putrajaya
+
+The Day of week will start from Monday to Friday
 
 Download : 	`DirectOpenCreateB.jar` | `OpneChooseB.jar`
 	
@@ -46,7 +50,8 @@ Download : 	`DirectOpenCreateB.jar` | `OpneChooseB.jar`
 
 * Operating System
   
-  * Windows 10
+  * at least Windows 10 (other version not sure)
+  * not sure for other OS (such as linux and macOS)
  
  
  ## Format of txt file
@@ -55,7 +60,9 @@ Download : 	`DirectOpenCreateB.jar` | `OpneChooseB.jar`
   * Next line for new course / new section  
   * No extra empty line / "part"
   * The order of course will be the order of select section for course
-     * For example: In CourseDetail.txt, BPA11303 follow by BPB14203, therefore it will start to select Lecture of BPA11303 and lab of BPA11303(if any) from CourseDetail.txt 		and next to BPB14203
+     * For example: In CourseDetail.txt, start form BPA11303 and follow by BPB14203. 
+     * Therefore it will start to select Lecture of BPA11303 and lab of BPA11303(if any) from CourseDetail.txt. 
+     * After that will continue to select lecture and lab BPB14203
      
   
   
@@ -67,7 +74,7 @@ Download : 	`DirectOpenCreateB.jar` | `OpneChooseB.jar`
 	  
 	  Credit Hour: 3
 	  
-	  isExam: Y(Yes)
+	  isExam: Y (Yes=Y)
 	  
 	  Exam: 2022-02-16(yyyy/mm/dd)
 	  
@@ -80,7 +87,7 @@ Download : 	`DirectOpenCreateB.jar` | `OpneChooseB.jar`
 	  
 	  Credit Hour: 3
 	  
-	  isExam: N(Yes/No)
+	  isExam: N (No=N)
   
   
    #### Content in CourseDetail.txt
@@ -89,7 +96,8 @@ Download : 	`DirectOpenCreateB.jar` | `OpneChooseB.jar`
    
    The example below show a course have exam and a course does not have exam
   
-	Order: CourseCode CourseName CreditHour YearExam MonthExam DateExam
+	Order(Have exame): CourseCode CourseName CreditHour isExam DateExam DayTimeExam
+	Order(No exam): CourseCode CourseName CreditHour isExam
   ___
 	BPA11303 Mathematic 3 Y 2022-02-16 AM
 	BPB14203 Sciences 3 N
@@ -128,6 +136,7 @@ Download : 	`DirectOpenCreateB.jar` | `OpneChooseB.jar`
   The lecture and lab section for the course in CourseDetail.txt
   
   For example, BPA11303 have lecture section 01 02, for lecture 01, have lab session 01A and 01B
+  For Day Of Week, 0 to 4 reprensent Monday To Friday for Group B , 0 to 4 reprensent Sunday To Thursday for Group A
   
 	Order: SectionName/Number CourseCode Type DayOfWeek HourStart HourEnd
   ___
