@@ -1,34 +1,17 @@
 <div id="top"></div>
 
-
 # TimeTableHelper
-A system can help student especially student in University Malaysia Pahang(UMP) to make a time table before going register [OpenCourse Registration System(OR)](https://or.ump.edu.my/or/index.jsp)
+This system is design to help student especially student in University Malaysia Pahang(UMP) to make a time table before going register [OpenCourse Registration System(OR)](https://or.ump.edu.my/or/index.jsp)
 
-As a UMP Student, please download in [Group B](#group-b)
+Theare are two major function
+ 1. Directly create a time table. `DirectOpenCreateB.jar`
+ 2. Select course as a simulation to register course in OR. `OpenChooseB.jar`
+
+As a UMP Student, refer [Group B](#group-b)
 
 For other university student, the method of registration may different. However, it still can use for "Direct Generate Time Table", view `DirectOpenCreateA.jar` OR `DirectOpenCreateB.jar`
 
- ## TODO
 
- ## Getting Started
-
- ### Prerequisites
-
-* TXT file
-
-   * Data of Course Detail 
-   * Data of Course Section
-
-* Java enviroment
-
-  * At least java 1.8 jre
-
-* Operating System
-  
-  * Windows 10
- 
- 
- 
 ## Chategory of state
   
 ### Group A
@@ -46,63 +29,33 @@ Download : 	`DirectOpenCreateB.jar` | `OpneChooseB.jar`
 	
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+
+ ## Getting Started
+
+
+ ### Prerequisites
+
+* TXT file
+
+   * Data of Course Detail 
+   * Data of Course Section
+
+* Java enviroment
+
+  * At least java 1.8 jre
+
+* Operating System
+  
+  * Windows 10
  
  
-## Usage
-  
- You can use this system to select the course that will register in OR. 
-  
- There are 2 group of state, and 3 type of usage provide
-
-
-### Step of Usage
-1. Prepare CourseDetail.txt
-2. Prepare CourseSection.txt
-3. Download XXX.jar
-
-4. 
-   * `DirectOpenCreateA.jar` OR `DirectOpenCreateB.jar`
-     * Desription: Directly generate Time Table
-	 * Able to export time table txt. Default directly export and delete old time table file
-     * Only put section(including Lecture or Lab) that need to create time table in CourseDetail.txt and CourseSection.txt
-	 * File name must exactly using "CourseDetail.txt" and "CourseSection.txt"
-     * Save CourseDetail.txt and CourseSection.txt in SAME DIRECTORY of XXX.jar
-     * Open CMD in the drectory of XXX.jar and use Command
-     
-       ```sh
-       java -jar XXX.jar
-       ```
-     * The time table should be come out if all thing correct		
-	
-  
-   * `OpenChooseA.jar` OR `OpenChooseB.jar`
-     * Desription: Without enter any path and can start to select course if "CourseDetail.txt" and "CourseSection.txt" exist in same directory
-	 * If file "CourseDetail.txt" and "CourseSection.txt" not exist, will prompt for enter the path
-     * Make sure put all section(including Lecture or Lab) that posible to create time table in CourseDetail.txt and CourseSection.txt
-	 * Able to export time table txt. Default to export and delete old time table file, but user need to confirm
-     * Open CMD in the drectory of XXX.jar and use Command
-     
-       ```sh
-       java -jar XXX.jar
-       ```
-     * Follow the instruction
-     * If there are any unavailable section, please try other combination of section
-     * The time table should be come out if all thing correct
-		
-		
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-  
-
-  ## Format of txt file
+ ## Format of txt file
   
   * Every "part" separate by a space bar(" ") 
   * Next line for new course / new section  
   * No extra empty line / "part"
   * The order of course will be the order of select section for course
-     * For example: In CourseDetail.txt, BPA11303 follow by BPB14203
-     * therefore it will start to select Lecture of BPA11303 and lab of BPA11303(if any) from CourseDetail.txt
-     * and next to BPB14203
+     * For example: In CourseDetail.txt, BPA11303 follow by BPB14203, therefore it will start to select Lecture of BPA11303 and lab of BPA11303(if any) from CourseDetail.txt 		and next to BPB14203
      
   
   
@@ -127,10 +80,14 @@ Download : 	`DirectOpenCreateB.jar` | `OpneChooseB.jar`
 	  
 	  Credit Hour: 3
 	  
-	  isExam: N(YNo)
+	  isExam: N(Yes/No)
   
   
    #### Content in CourseDetail.txt
+   
+   The basic information for a course
+   
+   The example below show a course have exam and a course does not have exam
   
 	Order: CourseCode CourseName CreditHour YearExam MonthExam DateExam
   ___
@@ -168,6 +125,10 @@ Download : 	`DirectOpenCreateB.jar` | `OpneChooseB.jar`
   
   #### Content in CourseDetail.txt:
   
+  The lecture and lab section for the course in CourseDetail.txt
+  
+  For example, BPA11303 have lecture section 01 02, for lecture 01, have lab session 01A and 01B
+  
 	Order: SectionName/Number CourseCode Type DayOfWeek HourStart HourEnd
   ___
 	01 BPA11303 1 1 14 17
@@ -182,11 +143,66 @@ Download : 	`DirectOpenCreateB.jar` | `OpneChooseB.jar`
  
   <p align="right">(<a href="#top">back to top</a>)</p>
 
+## Manual of Usage
+  
+ * `DirectOpenCreateA.jar` OR `DirectOpenCreateB.jar`
+	 * This is design for generate time table only
+	 * Put the lecture section and lab session that choosen, for example BPA11303 Matematik put in CourseDetail.txt,  BPA11303 01 and 01B put in CourseSection.txt
+	 * If the time for all session are not repeated, it will assign time table sucessfully
+	 * it will auto export timetable.txt that save the time table generated.
+	 * if timetable.txt exist, it will auto detele and create new.
+	 * if failed to assign please check the section time and format of data file.
+	 * can refer OpenCreateExample.zip as a example
+  
+ * `OpenChooseA.jar` OR `OpenChooseB.jar`
+	 * This is design for simulate choosing course
+	 * Make sure put all the posible lecture section and lab session that can choose, for example BPA11303 Matematik put in CourseDetail.txt,  BPA11303 01 01A 01B 02 02A 02B put in CourseSection.txt
+	 * This will help you to disable show repeated time during select section.
+	 * For example, BPA11303 have lecture section 01 02 03, chosen 01
+	 * if lab section 01A 01B exist for lecture section 01, it will display
+	 * if time of lab is repeated, it will also not display the section.
+	 * Next lecture section course also will check the repeat time.
+	 * If there are empty section available, the time table will not export. You should change another combination of section.
+	 * If the time for all session are not repeated, it will assign time table sucessfully
+	 * it will ask for export timetable.txt that save the time table generated, default is yes and press enter, if no please enter "n"
+	 * if timetable.txt exist, it will ask for detele old and create new one, default is yes and press enter, if no please enter "n"
+	 * can refer directCreateExample.zip as a example
 
-## Contact
+### Step of Usage
+1. Prepare CourseDetail.txt
+2. Prepare CourseSection.txt
+3. Download XXX.jar
 
-Liew Chun Kit- liewchunkit99@gmail.com
-
-Project Link: [https://github.com/ChunKit99/TimeTableHelper](https://github.com/ChunKit99/TimeTableHelper)
-
+4. 
+   * `DirectOpenCreateA.jar` OR `DirectOpenCreateB.jar`
+     * Desription: Directly generate Time Table
+	 * Able to export time table txt. Default directly export and delete old time table file
+     * Only put section(including Lecture or Lab) that need to create time table in CourseDetail.txt and CourseSection.txt
+	 * File name must exactly using "CourseDetail.txt" and "CourseSection.txt"
+     * Save CourseDetail.txt and CourseSection.txt in SAME DIRECTORY of XXX.jar
+     * Open CMD in the drectory of XXX.jar and use Command
+     
+       ```sh
+       java -jar XXX.jar
+       ```
+     * The time table should be come out if all thing correct		
+	
+  
+   * `OpenChooseA.jar` OR `OpenChooseB.jar`
+     * Desription: Without enter any path and can start to select course if "CourseDetail.txt" and "CourseSection.txt" exist in same directory
+	 * If file "CourseDetail.txt" and "CourseSection.txt" not exist, will prompt for enter the path, the file name is free to naming
+     * Make sure put all section(including Lecture or Lab) that posible to create time table in CourseDetail.txt and CourseSection.txt
+	 * Able to export time table txt. Default to export and delete old time table file, but user need to confirm
+     * Open CMD in the drectory of XXX.jar and use Command
+     
+       ```sh
+       java -jar XXX.jar
+       ```
+     * Follow the instruction
+     * If there are any unavailable section, please try other combination of section
+     * The time table should be come out if all thing correct
+		
+		
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+  
