@@ -8,6 +8,7 @@ As a UMP Student, please download in [Group B](#group-b)
 
 For other university student, the method of registration may different. However, it still can use for "Direct Generate Time Table", view `DirectOpenCreateA.jar` OR `DirectOpenCreateB.jar`
 
+ ## TODO
 
  ## Getting Started
 
@@ -34,14 +35,14 @@ For other university student, the method of registration may different. However,
   
 Negeri Johor, Kedah, Kelantan & Terenganu
 	
-Download : `DirectOpenChooseA.jar` | `DirectOpenCreateA.jar` | `InputPathChooseA.jar`
+Download : `DirectOpenCreateA.jar` | `OpneChooseA.jar`
 	
   
 ### Group B
   
 Negeri Perlis, Pulau Pinang, Perak, Selangor, Negeri Sembilan, Melaka, Pahang, Sabah, Sarawak, Wilayah Persekutuan Kuala Lumpur, Labuan & Putrajaya
 
-Download : 	`DirectOpenChooseB.jar` | `DirectOpenCreateB.jar` | `InputPathChooseB.jar`
+Download : 	`DirectOpenCreateB.jar` | `OpneChooseB.jar`
 	
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -62,6 +63,7 @@ Download : 	`DirectOpenChooseB.jar` | `DirectOpenCreateB.jar` | `InputPathChoose
 4. 
    * `DirectOpenCreateA.jar` OR `DirectOpenCreateB.jar`
      * Desription: Directly generate Time Table
+	 * Able to export time table txt. Default directly export and delete old time table file
      * Only put section(including Lecture or Lab) that need to create time table in CourseDetail.txt and CourseSection.txt
 	 * File name must exactly using "CourseDetail.txt" and "CourseSection.txt"
      * Save CourseDetail.txt and CourseSection.txt in SAME DIRECTORY of XXX.jar
@@ -73,10 +75,11 @@ Download : 	`DirectOpenChooseB.jar` | `DirectOpenCreateB.jar` | `InputPathChoose
      * The time table should be come out if all thing correct		
 	
   
-   * `DirectOpenChooseA.jar` OR `DirectOpenChooseB.jar`
-     * Desription: Without enter any path and can start to select course
-	 * File name must exactly using "CourseDetail.txt" and "CourseSection.txt"
-     * Put all section(including Lecture or Lab) that posible to create time table in CourseDetail.txt and CourseSection.txt
+   * `OpenChooseA.jar` OR `OpenChooseB.jar`
+     * Desription: Without enter any path and can start to select course if "CourseDetail.txt" and "CourseSection.txt" exist in same directory
+	 * If file "CourseDetail.txt" and "CourseSection.txt" not exist, will prompt for enter the path
+     * Make sure put all section(including Lecture or Lab) that posible to create time table in CourseDetail.txt and CourseSection.txt
+	 * Able to export time table txt. Default to export and delete old time table file, but user need to confirm
      * Open CMD in the drectory of XXX.jar and use Command
      
        ```sh
@@ -85,20 +88,6 @@ Download : 	`DirectOpenChooseB.jar` | `DirectOpenCreateB.jar` | `InputPathChoose
      * Follow the instruction
      * If there are any unavailable section, please try other combination of section
      * The time table should be come out if all thing correct
-
-
-   * `InputPathChooseA.jar` OR `InputPathChooseB.jar`
-     * Desription: Need to enter path of CourseDetail.txt and CourseSection.txt to select course
-	 * File name is free to naming
-     * Open CMD in the drectory of XXX.jar and use Command
-     
-       ```sh
-       java -jar XXX.jar
-       ```
-      * Enter path of file Course Detail
-      * Enter path of file Course Section
-		* For other directory: absolute path for txt file, example:"C:\User\Document\CourseDetail.txt"
-		* Same Directory: enter filename only, example: "CourseDetail.txt"
 		
 		
 <p align="right">(<a href="#top">back to top</a>)</p>

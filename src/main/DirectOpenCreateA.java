@@ -3,6 +3,8 @@ package main;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 /**
  * direct create time table, if repeat time happen will fail to create
  *
@@ -40,6 +42,7 @@ public class DirectOpenCreateA {
             //show time table
             System.out.println("\nTime Table:\n");
             myTimeTableApp.myTimeTable.showTimeTable();
+            myTimeTableApp.exportFile();
         }
 
     }
@@ -48,13 +51,32 @@ public class DirectOpenCreateA {
 	    String javaCourseDetail = "CourseDetail.txt";
 	    String javaCourseSection = "CourseSection.txt";
 		try {
-			System.out.println("\nLoading...");
+			System.out.println("");
+			System.out.println("Searching \"CourseDetail.txt\"...");
 			File f1 = new File(javaCourseDetail);
+			if(!f1.exists()) {
+				System.out.println("\"CourseDetail.txt\" not found...");
+				System.out.println("Please Prepare \"CourseDetail.txt\" And Try Again.");
+				System.exit(0);
+			}
+			System.out.println("\"CourseDetail.txt\"found...");
+			System.out.println("");
+			System.out.println("Searching \"CourseSection.txt\"...");
+			File f2 = new File(javaCourseSection);
+			if(!f2.exists()) {
+				System.out.println("\"CourseSection.txt\" not found...");
+				System.out.println("Please Prepare \"CourseSection.txt\" And Try Again.");
+				System.exit(0);
+			}
+			System.out.println("\"CourseSection.txt\"found...");
+			System.out.println("\nLoading...");
 			Scanner dataReader = new Scanner(f1);
+			Scanner dataReader2 = new Scanner(f2);
+			
 			while (dataReader.hasNextLine()) {
 				String fileData = dataReader.nextLine();
 				String str[] = fileData.split(" ");
-				if (str.length != 6) {//total lenth = 6
+				if (str.length != 6) {//total length = 6
 					if(str.length == 4) {//code(0) name(1) credit(2) y/n(3) date(4) AM/PM(5)
 						if(str[3].equals("N")) {//no exam
 							addCourseDetail(str[0], str[1], Integer.parseInt(str[2]));
@@ -69,10 +91,9 @@ public class DirectOpenCreateA {
 				}
 			}
 			dataReader.close();
-			File f2 = new File(javaCourseSection);
-			dataReader = new Scanner(f2);
-			while (dataReader.hasNextLine()) {
-				String fileData = dataReader.nextLine();
+			
+			while (dataReader2.hasNextLine()) {
+				String fileData = dataReader2.nextLine();
 				String str[] = fileData.split(" ");
 				if (str.length != 6) {// means format wrong
 					System.out.println("\nWarning Course Section!");
@@ -83,7 +104,8 @@ public class DirectOpenCreateA {
 							Integer.parseInt(str[4]), Integer.parseInt(str[5]));
 				}
 			}
-			dataReader.close();
+			dataReader2.close();
+			
 			
 		} catch (FileNotFoundException exception) {
 			System.out.println("Unexcpected error occurred!");
@@ -164,5 +186,46 @@ public class DirectOpenCreateA {
             }
         }
     }
+
+	public void exportFile() {
+		try {
+			File myObj = new File("MyTimeTable.txt");
+			System.out.println("\nCreating File...");
+			if (myObj.createNewFile()) {
+				System.out.println("File created: " + myObj.getName());
+				writeFile();
+				System.out.println("\nDone Export! ");
+				System.out.println("File Path: " + myObj.getAbsolutePath());
+			} else {
+				System.out.println("But File already exists.");
+					System.out.println("\nDeleting...");
+					removeFile();
+					exportFile();
+			}
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+	}
+
+	public void removeFile() {
+		File myObj = new File("MyTimeTable.txt");
+		if (myObj.delete()) {
+			System.out.println("Deleted the file: " + myObj.getName());
+		} else {
+			System.out.println("Failed to delete the file.");
+		}
+	}
+
+	public void writeFile() {
+		try {
+			FileWriter myWriter = new FileWriter("MyTimeTable.txt");
+			myWriter.write(myTimeTable.returnShowTimeTable());
+			myWriter.close();
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+	}
   
 }

@@ -6,7 +6,7 @@ package main;
  * 2. the course will select from top to down, top is most important
  * 3. suitable for lab + lecture mode or lecture only, if no lab will auto skip
  * 4. 1 lecture section, have 2 lab section, lab name must contain lecture name
- * 5. Need To enter path(absoluted path or file name for same directory)
+ * 5. directly choose course after java -jar xxx.jar(No enter path, same directory have txt)
  * 6. Cat A = johor kedah kelantan terenganu
  * 7. (Current in Use)Cat B = Other than Cat A 
  * @author Liew Chun Kit
@@ -18,13 +18,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import model.*;
 
-public class InputPathChooseA {
+public class DirectOpenInputChooseB {
 
 	static Scanner sc = new Scanner(System.in);
-	String category = "A";
+	String category = "B";
 	ArrayList<CourseDetail> myCourse = new ArrayList<CourseDetail>();// save course detail from txt
 	ArrayList<Section> sectionToAdd = new ArrayList<Section>();// save course section from txt
 	ArrayList<Course> courseToAdd = new ArrayList<Course>();// save course(lecture and lab) will add into time table
@@ -35,15 +37,15 @@ public class InputPathChooseA {
 	ArrayList<Section> buffersection = new ArrayList<Section>();// temp save lecture section from buffercourse
 	ArrayList<Section> buffersection2 = new ArrayList<Section>();// temp save lab section from buffercourse base on
 																	// lecture section
+	ArrayList<Integer> indexAvailableToSelect = new ArrayList<Integer>();// to temp store available index section
 
 	TimeTable myTimeTable = new TimeTable(category);
 	boolean isErrorFileCourseDetail = false, isErrorFileCourseSection = false;
 	int totalCredit = 0, totalSubjectRegister = 0;
 
 	public static void main(String[] args) {
-		InputPathChooseA myTimeTableApp = new InputPathChooseA();
+		DirectOpenInputChooseB myTimeTableApp = new DirectOpenInputChooseB();
 		int indexSectionLecture, indexSectionLab;
-		
 		myTimeTableApp.loadFile();
 		myTimeTableApp.checkFormatFileLoaded();
 		myTimeTableApp.createAllCourse();
@@ -55,9 +57,11 @@ public class InputPathChooseA {
 					"\n" + myTimeTableApp.myCourse.get(i).getID() + " " + myTimeTableApp.myCourse.get(i).getName());
 			System.out.println("Lecture:");
 			int numAvailableLecture = 0;
+			myTimeTableApp.indexAvailableToSelect.clear();
 			for (int j = 0; j < myTimeTableApp.buffersection.size(); j++) {
 				if (myTimeTableApp.isDisplaySection(myTimeTableApp.buffersection.get(j))) {
 					numAvailableLecture++;
+					myTimeTableApp.indexAvailableToSelect.add(j);
 					System.out.println("Index (" + j + "): " + " Session: " + myTimeTableApp.buffersection.get(j).id
 							+ " " + myTimeTableApp.buffersection.get(j).getSubject().getDayName() + " "
 							+ myTimeTableApp.buffersection.get(j).getSubject().getTimeStart() + " "
@@ -67,14 +71,20 @@ public class InputPathChooseA {
 			System.out.println("");
 			// ready to know which lecture section need to add
 			if (numAvailableLecture == 0) {// means no available list for lecture
-				System.out.println("\nEmpty Availble Lecture Section: " + myTimeTableApp.myCourse.get(i).getID()
-						+ " " + myTimeTableApp.myCourse.get(i).getName()
+				System.out.println("\nEmpty Availble Lecture Section: " + myTimeTableApp.myCourse.get(i).getID() + " "
+						+ myTimeTableApp.myCourse.get(i).getName()
 						+ "\nYou Need To Choose Another Section For Previous Course: "
 						+ myTimeTableApp.myCourse.get(i - 1).getID() + " "
 						+ myTimeTableApp.myCourse.get(i - 1).getName());
 			} else {
-				System.out.println("Enter index of Lecture Course");
+				System.out.println("Enter index of Lecture Course " + myTimeTableApp.indexAvailableToSelect.toString());
 				indexSectionLecture = sc.nextInt();
+				while (!myTimeTableApp.indexAvailableToSelect.contains(indexSectionLecture)) {
+					System.out.println("\nWarning! The index " + indexSectionLecture + " are not available to select!");
+					System.out.println(
+							"Enter index of Lecture Course " + myTimeTableApp.indexAvailableToSelect.toString());
+					indexSectionLecture = sc.nextInt();
+				}
 				Section sectionLecturetoAdd = myTimeTableApp.buffersection.get(indexSectionLecture);
 				myTimeTableApp.courseToAdd.add(new Course(myTimeTableApp.myCourse.get(i), sectionLecturetoAdd));
 				myTimeTableApp.totalCredit += myTimeTableApp.myCourse.get(i).getCreditHour();// add credit hour
@@ -83,12 +93,12 @@ public class InputPathChooseA {
 				myTimeTableApp.createLabBuffer(sectionLecturetoAdd.id);
 				int numLabAvailable = 0;
 				boolean labDisplayStart = true;
+				myTimeTableApp.indexAvailableToSelect.clear();
 				for (int k = 0; k < myTimeTableApp.buffersection2.size(); k++) {
 					if (myTimeTableApp.isDisplaySection(myTimeTableApp.buffersection2.get(k))) {
 						numLabAvailable++;
 						if (labDisplayStart) {
 							System.out.println("\nLab:");
-							
 							labDisplayStart = false;
 						}
 						System.out
@@ -96,6 +106,7 @@ public class InputPathChooseA {
 										+ " " + myTimeTableApp.buffersection2.get(k).getSubject().getDayName() + " "
 										+ myTimeTableApp.buffersection2.get(k).getSubject().getTimeStart() + " "
 										+ myTimeTableApp.buffersection2.get(k).getSubject().getTimeEnd());
+						myTimeTableApp.indexAvailableToSelect.add(k);
 					}
 				}
 				if (!myTimeTableApp.buffersection2.isEmpty()) {// there have match lab form the lecture select
@@ -111,8 +122,16 @@ public class InputPathChooseA {
 						myTimeTableApp.totalCredit -= myTimeTableApp.myCourse.get(i).getCreditHour();
 						myTimeTableApp.totalSubjectRegister -= 1;//// remove previous add number subject
 					} else {
-						System.out.println("\nEnter index of Lab Course:");
+						System.out.println(
+								"\nEnter index of Lab Course " + myTimeTableApp.indexAvailableToSelect.toString());
 						indexSectionLab = sc.nextInt();
+						while (!myTimeTableApp.indexAvailableToSelect.contains(indexSectionLab)) {
+							System.out.println(
+									"\nWarning! The index " + indexSectionLab + " are not available to select!");
+							System.out.println(
+									"Enter index of Lab Course " + myTimeTableApp.indexAvailableToSelect.toString());
+							indexSectionLab = sc.nextInt();
+						}
 						Section sectionLabtoAdd = myTimeTableApp.buffersection2.get(indexSectionLab);
 						myTimeTableApp.courseToAdd.add(new Course(myTimeTableApp.myCourse.get(i), sectionLabtoAdd));
 					}
@@ -123,46 +142,86 @@ public class InputPathChooseA {
 		// assign time table
 		if (myTimeTableApp.assignCourseTimeTable()) {
 			// show time table
-			System.out.println("\nTime Table:\n");
-			myTimeTableApp.myTimeTable.showTimeTable();
 			myTimeTableApp.showAllCourseToAddDetail();
 		}
+		System.out.println("Thanks For Using. Bye!!");
 	}
 
 	public void loadFile() {
-		System.out.println("Path of Course Detail:");
-		String pathCourseDetail = sc.nextLine();
-		System.out.println("Path of Course Section:");
-		String pathCourseSection = sc.nextLine();
+		String pathCourseDetail = "CourseDetail.txt";
+		String pathCourseSection = "CourseSection.txt";
 
-		String javaCourseDetail = pathCourseDetail.replace("\\", "/");
-		String javaCourseSection = pathCourseSection.replace("\\", "/");
+		Scanner dataReader1;
+		Scanner dataReader2;
 		try {
+			System.out.println("");
+			System.out.println("Searching \"CourseDetail.txt\"...");
+			// load and search course detail
+			File f1 = new File(pathCourseDetail);
+			if (f1.exists()) {// file exist, direct open
+				System.out.println("\"CourseDetail.txt\" found...");
+				dataReader1 = new Scanner(f1);
+			} else {// file not exist need to input path
+				System.out.println("\"CourseDetail.txt\" not found...");
+				System.out.println("");
+				System.out.println("Please Enter Path of Course Detail:");
+				pathCourseDetail = sc.nextLine();
+				String javaCourseDetail = pathCourseDetail.replace("\\", "/");
+				f1 = new File(javaCourseDetail);
+				if (!f1.exists()) {// the path of file not exist
+					System.out.println("\nSorry, This File is Not Exist!");
+					System.out.println("Please Try Agian.");
+					System.exit(0);
+				}
+				System.out.println("Course Detail found...");
+				dataReader1 = new Scanner(f1);
+			}
+			System.out.println("");
+			System.out.println("Searching \"CourseSection.txt\"...");
+			File f2 = new File(pathCourseSection);
+			if (f2.exists()) {// exist
+				System.out.println("\"CourseSection.txt\" found...");
+				dataReader2 = new Scanner(f2);
+			} else {// not exist
+				System.out.println("\"CourseSection.txt\" not found...");
+				System.out.println("");
+				System.out.println("Please Enter Path of Course Section:");
+				pathCourseSection = sc.nextLine();
+				String javaCourseSection = pathCourseSection.replace("\\", "/");
+				f2 = new File(javaCourseSection);
+				if (!f2.exists()) {// the path of file not exist
+					System.out.println("\nSorry, This File is Not Exist!");
+					System.out.println("Please Try Agian.");
+					System.exit(0);
+				}
+				System.out.println("Course Section found...");
+				dataReader2 = new Scanner(f2);
+			}
+
 			System.out.println("\nLoading...");
-			File f1 = new File(javaCourseDetail);
-			Scanner dataReader = new Scanner(f1);
-			while (dataReader.hasNextLine()) {
-				String fileData = dataReader.nextLine();
+			while (dataReader1.hasNextLine()) {
+				String fileData = dataReader1.nextLine();
 				String str[] = fileData.split(" ");
-				if (str.length != 6) {//total lenth = 6
-					if(str.length == 4) {//code(0) name(1) credit(2) y/n(3) date(4) AM/PM(5)
-						if(str[3].equals("N")) {//no exam
+				if (str.length != 6) {// total lenth = 6
+					if (str.length == 4) {// code(0) name(1) credit(2) y/n(3) date(4) AM/PM(5)
+						if (str[3].equals("N")) {// no exam
 							addCourseDetail(str[0], str[1], Integer.parseInt(str[2]));
-						}else {// should have exam but only have 4 part
+						} else {// should have exam but only have 4 part
 							System.out.println("\nWarning Course Detail!");
 							System.out.println("Error at Line :" + fileData);
 							isErrorFileCourseDetail = true;
 						}
 					}
-				} else {//str.length == 6
-					addCourseDetail(str[0], str[1], Integer.parseInt(str[2]), LocalDate.parse(str[4]), str[5]);//skip str[3], it's indexExam
+				} else {// str.length == 6
+					addCourseDetail(str[0], str[1], Integer.parseInt(str[2]), LocalDate.parse(str[4]), str[5]);// skip
+																												// str[3],
+																												// it's
+																												// indexExam
 				}
 			}
-			dataReader.close();
-			File f2 = new File(javaCourseSection);
-			dataReader = new Scanner(f2);
-			while (dataReader.hasNextLine()) {
-				String fileData = dataReader.nextLine();
+			dataReader1.close();
+			while (dataReader2.hasNextLine()) {
+				String fileData = dataReader2.nextLine();
 				String str[] = fileData.split(" ");
 				if (str.length != 6) {// means format wrong
 					System.out.println("\nWarning Course Section!");
@@ -173,8 +232,8 @@ public class InputPathChooseA {
 							Integer.parseInt(str[4]), Integer.parseInt(str[5]));
 				}
 			}
-			dataReader.close();
-			
+			dataReader2.close();
+
 		} catch (FileNotFoundException exception) {
 			System.out.println("Unexcpected error occurred!");
 			exception.printStackTrace();
@@ -183,9 +242,10 @@ public class InputPathChooseA {
 	}
 
 	public void checkFormatFileLoaded() {
+		System.out.println("");
 		if (isErrorFileCourseDetail || isErrorFileCourseSection) {// check format txt
 			if (isErrorFileCourseDetail) {
-				System.out.println("\nFormat File Course Detail Wrong!");
+				System.out.println("Format File Course Detail Wrong!");
 			}
 			if (isErrorFileCourseSection) {
 				System.out.println("Format File Course Section Wrong!");
@@ -204,19 +264,18 @@ public class InputPathChooseA {
 						"This Program Will End, Please Check And Make Sure Not Empty Content For Course Detail and Course Section.");
 				System.exit(0);
 			} else {// all format correct and not empty content
-				System.out.println(myCourse.size() +" Course Loaded...");
-				System.out.println(sectionToAdd.size() +" Section Loaded...");
-				System.out.println("Loaded Sucessfully!");
-				System.out.println("\nWelcome To Time Table Helper!!\n");
+				System.out.println(myCourse.size() + " Course Loaded...");
+				System.out.println(sectionToAdd.size() + " Section Loaded...");
+				System.out.println("\nLoaded Sucessfully!");
+				System.out.println("\nWelcome To Time Table Helper!!");
 			}
-
 		}
 	}
 
 	public void addCourseDetail(String codeCourse, String nameCourse, int creditHour) {
 		myCourse.add(new CourseDetail(codeCourse, nameCourse, creditHour));
 	}
-	
+
 	public void addCourseDetail(String codeCourse, String nameCourse, int creditHour, LocalDate date, String dayTime) {
 		myCourse.add(new CourseDetail(codeCourse, nameCourse, creditHour, date, dayTime));
 	}
@@ -273,15 +332,15 @@ public class InputPathChooseA {
 
 	public boolean isDisplaySection(Section sectionToCheck) {
 		boolean isDisplay = true;
-		// searching all course in courseToAdd to campare sectionToCheck
+		// searching all course in courseToAdd to compare sectionToCheck
 		for (int k = 0; k < courseToAdd.size(); k++) {
 			// check same/repeat day of week from courseToAdd
 			if (courseToAdd.get(k).getSection().getSubject().getDayWeek() == sectionToCheck.getSubject().getDayWeek()) {
 				// same day
 				// if timestart tocheck equal or after timestart toadd(not before) then true.
 				// if timestart tocheck before timeend toadd then true(not same not after).
-				// both true wiil not display(set isdisplay to false).
-				// what happend if time start tocheck same time end toadd, since timestart
+				// both true will not display(set isdisplay to false).
+				// what happen if time start tocheck same time end toadd, since timestart
 				// tocheck before timeend toadd will false, finaly not true and skip the if
 				if ((!sectionToCheck.getSubject().getTimeStart()
 						.isBefore(courseToAdd.get(k).getSection().getSubject().getTimeStart()))
@@ -311,19 +370,103 @@ public class InputPathChooseA {
 	}
 
 	public void showAllCourseToAddDetail() {
-		System.out.println("\n");
+		System.out.println("\nTime Table:\n");
+		myTimeTable.showTimeTable();
+		System.out.println("");
+		showCurrentCourseToAdd();
+		System.out.println("");
 		System.out.println("Total Credit Hour Added: " + totalCredit);
 		System.out.println("Number Subject Should Add: " + myCourse.size());
 		System.out.println("Number Subject Added: " + totalSubjectRegister);
 		System.out.print("Is Done To Add All Subject?: ");
-		if(myCourse.size()!=totalSubjectRegister) {
+		if (myCourse.size() != totalSubjectRegister) {
 			System.out.println("No!!");
-		}else {
+			System.out.println("");
+			System.out.println("Please Try Other Combination Of Section.");
+			System.out.println("");
+		} else {
 			System.out.println("Yes.");
+			System.out.println("");
+			System.out.println("Congraturation! All Course added.");
+			System.out.println("");
+
+			checkExportTimeTableFile();
+
 		}
-		System.out.println("\nCourse To Add:");
+
+	}
+
+	public void showCurrentCourseToAdd() {
+		System.out.println("Course To Add:");
 		for (int i = 0; i < courseToAdd.size(); i++) {
 			System.out.println(courseToAdd.get(i).display());
+		}
+	}
+
+	public void checkExportTimeTableFile() {
+		String opt;
+		System.out.println("Time Table Export:");
+		System.out.println("Export the Time Table in txt?(Y/n)");
+		System.out.println("Default Yes to export unless enter \"n\"");
+		System.out.println("Press Enter To Export");
+
+		sc.nextLine();
+		opt = sc.nextLine();
+		if (opt.equals("n") || opt.equals("N")) {
+			System.out.println("\nSkip export...");
+		} else {
+			System.out.println("\nExporting...");
+			exportFile();
+		}
+	}
+
+	public void exportFile() {
+		String opt;
+		try {
+			File myObj = new File("MyTimeTable.txt");
+			System.out.println("\nCreating File...");
+			if (myObj.createNewFile()) {
+				System.out.println("File created: " + myObj.getName());
+				writeFile();
+				System.out.println("\nDone Export! ");
+				System.out.println("File Path: " + myObj.getAbsolutePath());
+			} else {
+				System.out.println("But File already exists.");
+				System.out.println("\nRemove the old time table?(Y/n)");
+				System.out.println("Default Yes to remove unless enter \"n\"");
+				System.out.println("Press Enter To Delete");
+				opt = sc.nextLine();
+				if (opt.equals("n") || opt.equals("N")) {
+					System.out.println("\nNot nRemove the old time table.");
+				} else {
+					System.out.println("\nDeleting...");
+					removeFile();
+					exportFile();
+				}
+			}
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+	}
+
+	public void removeFile() {
+		File myObj = new File("MyTimeTable.txt");
+		if (myObj.delete()) {
+			System.out.println("Deleted the file: " + myObj.getName());
+		} else {
+			System.out.println("Failed to delete the file.");
+		}
+	}
+
+	public void writeFile() {
+		try {
+			FileWriter myWriter = new FileWriter("MyTimeTable.txt");
+			myWriter.write(myTimeTable.returnShowTimeTable());
+			myWriter.close();
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
 		}
 	}
 
