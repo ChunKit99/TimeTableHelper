@@ -21,7 +21,7 @@ import java.io.FileNotFoundException;
 
 import model.*;
 
-public class DirectOpenChooseB {
+public class DirectOpenInputChooseB {
 
 	static Scanner sc = new Scanner(System.in);
 	String category = "B";
@@ -41,7 +41,7 @@ public class DirectOpenChooseB {
 	int totalCredit = 0, totalSubjectRegister = 0;
 
     public static void main(String[] args) {
-        DirectOpenChooseB myTimeTableApp = new DirectOpenChooseB();
+        DirectOpenInputChooseB myTimeTableApp = new DirectOpenInputChooseB();
         int indexSectionLecture, indexSectionLab;
 
         myTimeTableApp.loadFile();
@@ -132,14 +132,57 @@ public class DirectOpenChooseB {
 	public void loadFile() {
         String pathCourseDetail = "CourseDetail.txt";
         String pathCourseSection = "CourseSection.txt";
-		String javaCourseDetail = pathCourseDetail.replace("\\", "/");
-		String javaCourseSection = pathCourseSection.replace("\\", "/");
+
+		Scanner dataReader1;
+		Scanner dataReader2;
 		try {
+			System.out.println("");
+			System.out.println("Searching \"CourseDetail.txt\"...");
+			//load and search course detail
+			File f1 = new File(pathCourseDetail);
+			if(f1.exists()) {//file exist, direct open
+				System.out.println("\"CourseDetail.txt\" found...");
+				dataReader1 = new Scanner(f1);
+			}else {//file not exist need to input path
+				System.out.println("\"CourseDetail.txt\" not found...");
+				System.out.println("");
+				System.out.println("Please Enter Path of Course Detail:");
+				pathCourseDetail = sc.nextLine();
+				String javaCourseDetail = pathCourseDetail.replace("\\", "/");
+				f1 = new File(javaCourseDetail);
+				if(!f1.exists()) {//the path of file not exist	
+					System.out.println("\nSorry, This File is Not Exist!");
+					System.out.println("Please Try Agian.");
+					System.exit(0);
+				}
+				System.out.println("Course Detail found...");
+				dataReader1 = new Scanner(f1);
+			}
+			System.out.println("");
+			System.out.println("Searching \"CourseSection.txt\"...");
+			File f2 = new File(pathCourseSection);
+			if(f2.exists()) {//exist
+				System.out.println("\"CourseSection.txt\" found...");
+				dataReader2 = new Scanner(f2);
+			}else {//not exist
+				System.out.println("\"CourseSection.txt\" not found...");
+				System.out.println("");
+				System.out.println("Please Enter Path of Course Section:");
+				pathCourseSection = sc.nextLine();
+				String javaCourseSection = pathCourseSection.replace("\\", "/");
+				f2 = new File(javaCourseSection);
+				if(!f2.exists()) {//the path of file not exist	
+					System.out.println("\nSorry, This File is Not Exist!");
+					System.out.println("Please Try Agian.");
+					System.exit(0);
+				}
+				System.out.println("Course Section found...");
+				dataReader2 = new Scanner(f2);
+			}
+			
 			System.out.println("\nLoading...");
-			File f1 = new File(javaCourseDetail);
-			Scanner dataReader = new Scanner(f1);
-			while (dataReader.hasNextLine()) {
-				String fileData = dataReader.nextLine();
+			while (dataReader1.hasNextLine()) {
+				String fileData = dataReader1.nextLine();
 				String str[] = fileData.split(" ");
 				if (str.length != 6) {//total lenth = 6
 					if(str.length == 4) {//code(0) name(1) credit(2) y/n(3) date(4) AM/PM(5)
@@ -155,11 +198,9 @@ public class DirectOpenChooseB {
 					addCourseDetail(str[0], str[1], Integer.parseInt(str[2]), LocalDate.parse(str[4]), str[5]);//skip str[3], it's indexExam
 				}
 			}
-			dataReader.close();
-			File f2 = new File(javaCourseSection);
-			dataReader = new Scanner(f2);
-			while (dataReader.hasNextLine()) {
-				String fileData = dataReader.nextLine();
+			dataReader1.close();
+			while (dataReader2.hasNextLine()) {
+				String fileData = dataReader2.nextLine();
 				String str[] = fileData.split(" ");
 				if (str.length != 6) {// means format wrong
 					System.out.println("\nWarning Course Section!");
@@ -170,7 +211,7 @@ public class DirectOpenChooseB {
 							Integer.parseInt(str[4]), Integer.parseInt(str[5]));
 				}
 			}
-			dataReader.close();
+			dataReader2.close();
 			
 		} catch (FileNotFoundException exception) {
 			System.out.println("Unexcpected error occurred!");
@@ -180,9 +221,10 @@ public class DirectOpenChooseB {
 	}
 
 	public void checkFormatFileLoaded() {
+		System.out.println("");
 		if (isErrorFileCourseDetail || isErrorFileCourseSection) {// check format txt
 			if (isErrorFileCourseDetail) {
-				System.out.println("\nFormat File Course Detail Wrong!");
+				System.out.println("Format File Course Detail Wrong!");
 			}
 			if (isErrorFileCourseSection) {
 				System.out.println("Format File Course Section Wrong!");
@@ -203,10 +245,9 @@ public class DirectOpenChooseB {
 			} else {// all format correct and not empty content
 				System.out.println(myCourse.size() +" Course Loaded...");
 				System.out.println(sectionToAdd.size() +" Section Loaded...");
-				System.out.println("Loaded Sucessfully!");
-				System.out.println("\nWelcome To Time Table Helper!!\n");
+				System.out.println("\nLoaded Sucessfully!");
+				System.out.println("\nWelcome To Time Table Helper!!");
 			}
-
 		}
 	}
 
