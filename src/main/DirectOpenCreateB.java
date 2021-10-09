@@ -48,13 +48,32 @@ public class DirectOpenCreateB {
 	    String javaCourseDetail = "CourseDetail.txt";
 	    String javaCourseSection = "CourseSection.txt";
 		try {
-			System.out.println("\nLoading...");
+			System.out.println("");
+			System.out.println("Searching \"CourseDetail.txt\"...");
 			File f1 = new File(javaCourseDetail);
+			if(!f1.exists()) {
+				System.out.println("\"CourseDetail.txt\" not found...");
+				System.out.println("Please Prepare \"CourseDetail.txt\" And Try Again.");
+				System.exit(0);
+			}
+			System.out.println("\"CourseDetail.txt\"found...");
+			System.out.println("");
+			System.out.println("Searching \"CourseSection.txt\"...");
+			File f2 = new File(javaCourseSection);
+			if(!f2.exists()) {
+				System.out.println("\"CourseSection.txt\" not found...");
+				System.out.println("Please Prepare \"CourseSection.txt\" And Try Again.");
+				System.exit(0);
+			}
+			System.out.println("\"CourseSection.txt\"found...");
+			System.out.println("\nLoading...");
 			Scanner dataReader = new Scanner(f1);
+			Scanner dataReader2 = new Scanner(f2);
+			
 			while (dataReader.hasNextLine()) {
 				String fileData = dataReader.nextLine();
 				String str[] = fileData.split(" ");
-				if (str.length != 6) {//total lenth = 6
+				if (str.length != 6) {//total length = 6
 					if(str.length == 4) {//code(0) name(1) credit(2) y/n(3) date(4) AM/PM(5)
 						if(str[3].equals("N")) {//no exam
 							addCourseDetail(str[0], str[1], Integer.parseInt(str[2]));
@@ -69,10 +88,9 @@ public class DirectOpenCreateB {
 				}
 			}
 			dataReader.close();
-			File f2 = new File(javaCourseSection);
-			dataReader = new Scanner(f2);
-			while (dataReader.hasNextLine()) {
-				String fileData = dataReader.nextLine();
+			
+			while (dataReader2.hasNextLine()) {
+				String fileData = dataReader2.nextLine();
 				String str[] = fileData.split(" ");
 				if (str.length != 6) {// means format wrong
 					System.out.println("\nWarning Course Section!");
@@ -83,7 +101,8 @@ public class DirectOpenCreateB {
 							Integer.parseInt(str[4]), Integer.parseInt(str[5]));
 				}
 			}
-			dataReader.close();
+			dataReader2.close();
+			
 			
 		} catch (FileNotFoundException exception) {
 			System.out.println("Unexcpected error occurred!");
