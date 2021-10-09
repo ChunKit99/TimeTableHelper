@@ -35,7 +35,8 @@ public class DirectOpenInputChooseB {
 	ArrayList<Section> buffersection = new ArrayList<Section>();// temp save lecture section from buffercourse
 	ArrayList<Section> buffersection2 = new ArrayList<Section>();// temp save lab section from buffercourse base on
 																	// lecture section
-
+	ArrayList<Integer> indexAvailableToSelect = new ArrayList<Integer>();//to temp store available index section
+	
 	TimeTable myTimeTable = new TimeTable(category);
 	boolean isErrorFileCourseDetail = false, isErrorFileCourseSection = false;
 	int totalCredit = 0, totalSubjectRegister = 0;
@@ -55,9 +56,11 @@ public class DirectOpenInputChooseB {
 					"\n" + myTimeTableApp.myCourse.get(i).getID() + " " + myTimeTableApp.myCourse.get(i).getName());
 			System.out.println("Lecture:");
 			int numAvailableLecture = 0;
+			myTimeTableApp.indexAvailableToSelect.clear();
 			for (int j = 0; j < myTimeTableApp.buffersection.size(); j++) {
 				if (myTimeTableApp.isDisplaySection(myTimeTableApp.buffersection.get(j))) {
 					numAvailableLecture++;
+					myTimeTableApp.indexAvailableToSelect.add(j);
 					System.out.println("Index (" + j + "): " + " Session: " + myTimeTableApp.buffersection.get(j).id
 							+ " " + myTimeTableApp.buffersection.get(j).getSubject().getDayName() + " "
 							+ myTimeTableApp.buffersection.get(j).getSubject().getTimeStart() + " "
@@ -73,8 +76,13 @@ public class DirectOpenInputChooseB {
 						+ myTimeTableApp.myCourse.get(i - 1).getID() + " "
 						+ myTimeTableApp.myCourse.get(i - 1).getName());
 			} else {
-				System.out.println("Enter index of Lecture Course");
+				System.out.println("Enter index of Lecture Course "+ myTimeTableApp.indexAvailableToSelect.toString());
 				indexSectionLecture = sc.nextInt();
+				while(!myTimeTableApp.indexAvailableToSelect.contains(indexSectionLecture)) {
+					System.out.println("\nWarning! The index "+indexSectionLecture+ " are not available to select!");
+					System.out.println("Enter index of Lecture Course "+ myTimeTableApp.indexAvailableToSelect.toString());
+					indexSectionLecture = sc.nextInt();
+				}
 				Section sectionLecturetoAdd = myTimeTableApp.buffersection.get(indexSectionLecture);
 				myTimeTableApp.courseToAdd.add(new Course(myTimeTableApp.myCourse.get(i), sectionLecturetoAdd));
 				myTimeTableApp.totalCredit += myTimeTableApp.myCourse.get(i).getCreditHour();// add credit hour
@@ -83,12 +91,12 @@ public class DirectOpenInputChooseB {
 				myTimeTableApp.createLabBuffer(sectionLecturetoAdd.id);
 				int numLabAvailable = 0;
 				boolean labDisplayStart = true;
+				myTimeTableApp.indexAvailableToSelect.clear();
 				for (int k = 0; k < myTimeTableApp.buffersection2.size(); k++) {
 					if (myTimeTableApp.isDisplaySection(myTimeTableApp.buffersection2.get(k))) {
 						numLabAvailable++;
 						if (labDisplayStart) {
 							System.out.println("\nLab:");
-							
 							labDisplayStart = false;
 						}
 						System.out
@@ -96,6 +104,7 @@ public class DirectOpenInputChooseB {
 										+ " " + myTimeTableApp.buffersection2.get(k).getSubject().getDayName() + " "
 										+ myTimeTableApp.buffersection2.get(k).getSubject().getTimeStart() + " "
 										+ myTimeTableApp.buffersection2.get(k).getSubject().getTimeEnd());
+						myTimeTableApp.indexAvailableToSelect.add(k);
 					}
 				}
 				if (!myTimeTableApp.buffersection2.isEmpty()) {// there have match lab form the lecture select
@@ -111,8 +120,13 @@ public class DirectOpenInputChooseB {
 						myTimeTableApp.totalCredit -= myTimeTableApp.myCourse.get(i).getCreditHour();
 						myTimeTableApp.totalSubjectRegister -= 1;//// remove previous add number subject
 					} else {
-						System.out.println("\nEnter index of Lab Course:");
+						System.out.println("\nEnter index of Lab Course "+ myTimeTableApp.indexAvailableToSelect.toString());
 						indexSectionLab = sc.nextInt();
+						while(!myTimeTableApp.indexAvailableToSelect.contains(indexSectionLab)) {
+							System.out.println("\nWarning! The index "+indexSectionLab+ " are not available to select!");
+							System.out.println("Enter index of Lab Course "+ myTimeTableApp.indexAvailableToSelect.toString());
+							indexSectionLab = sc.nextInt();
+						}
 						Section sectionLabtoAdd = myTimeTableApp.buffersection2.get(indexSectionLab);
 						myTimeTableApp.courseToAdd.add(new Course(myTimeTableApp.myCourse.get(i), sectionLabtoAdd));
 					}
