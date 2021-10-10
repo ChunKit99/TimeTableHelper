@@ -56,7 +56,7 @@ For other university student, the method of registration may different. However,
 	
   
    * `OpenChooseA.jar` OR `OpenChooseB.jar`  (<a href="#file2">More Detail</a>)
-     * Desription: Simualtion of select course
+     * Desription: Simulation of select course
      * Open CMD in the drectory of XXX.jar and use Command
      
        ```sh
