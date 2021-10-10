@@ -50,6 +50,8 @@ For other university student, the method of registration may different. However,
        ```sh
        java -jar XXX.jar
        ```
+       ![image](https://drive.google.com/uc?export=view&id=1zV5ViPgZQpCD7XPn1KxfVke3VavSaJkX)
+       
      * The time table should be come out if all thing correct		
 	
   
@@ -60,6 +62,8 @@ For other university student, the method of registration may different. However,
        ```sh
        java -jar XXX.jar
        ```
+       ![image](https://drive.google.com/uc?export=view&id=1zV5ViPgZQpCD7XPn1KxfVke3VavSaJkX)
+       
      * Follow the instruction
      * If there are any unavailable section, please try other combination of section
      * The time table should be come out if all thing correct
