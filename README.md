@@ -122,7 +122,7 @@ Goto (<a href="#formatsection">CourseSection.txt</a>)
    
    The example below show a course have exam and a course does not have exam
   
-	Order(Have exame): CourseCode CourseName CreditHour isExam DateExam DayTimeExam
+	Order(Have exam): CourseCode CourseName CreditHour isExam DateExam DayTimeExam
 	Order(No exam): CourseCode CourseName CreditHour isExam
   ___
 	BPA11303 Mathematic 3 Y 2022-02-16 AM
